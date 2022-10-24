@@ -8,7 +8,8 @@ var _velocity := Vector2.ZERO
 var _input_direction := 0.0
 var _facing_right := true
 onready var sprite = $Sprite
-onready var jump_buffer = $JumpBuffer
+onready var jump_buffer = $JumpTimers/JumpBuffer
+onready var coyote_timer = $JumpTimers/CoyoteTimer
 
 func _input(event):
 	if event.is_action_pressed("jump"):
@@ -24,11 +25,16 @@ func _physics_process(delta):
 		_apply_acceleration(_input_direction * acceleration * delta)
 		_check_direction_facing()
 	
-	if is_on_floor() and !jump_buffer.is_stopped():
-		_add_jump_force()
-	
-	if !is_on_floor():
+	if is_on_floor():
+		coyote_timer.start()
+		
+		if !jump_buffer.is_stopped():
+			_add_jump_force()
+	else:
 		_apply_gravity()
+		
+		if !coyote_timer.is_stopped() and !jump_buffer.is_stopped():
+			_add_jump_force()
 	
 	_apply_movement()
 
@@ -63,6 +69,7 @@ func _check_direction_facing():
 func _add_jump_force():
 	_velocity.y = -200
 	jump_buffer.stop()
+	coyote_timer.stop()
 
 
 func _apply_gravity():
