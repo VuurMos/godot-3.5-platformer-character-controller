@@ -4,29 +4,32 @@ class_name PlatformController
 var max_speed := 120
 var acceleration := 500
 var friction := 400
-
 var _velocity := Vector2.ZERO
 var _input_direction := 0.0
-
 var _facing_right := true
 onready var sprite = $Sprite
+onready var jump_buffer = $JumpBuffer
 
 func _input(event):
-	if event.is_action_pressed("jump") and is_on_floor():
-		_velocity.y = -200
+	if event.is_action_pressed("jump"):
+		jump_buffer.start()
 
 func _physics_process(delta):
 	_input_direction = _get_input_direction()
 	
-	#add flip
-	
 	if is_zero_approx(_input_direction):
-		_apply_friction(friction * delta)
+		if !is_zero_approx(_velocity.x):
+			_apply_friction(friction * delta)
 	else:
 		_apply_acceleration(_input_direction * acceleration * delta)
 		_check_direction_facing()
 	
-	_apply_gravity()
+	if is_on_floor() and !jump_buffer.is_stopped():
+		_add_jump_force()
+	
+	if !is_on_floor():
+		_apply_gravity()
+	
 	_apply_movement()
 
 
@@ -55,6 +58,12 @@ func _check_direction_facing():
 	else:
 		_facing_right = false
 		sprite.flip_h = true
+
+
+func _add_jump_force():
+	_velocity.y = -200
+	jump_buffer.stop()
+
 
 func _apply_gravity():
 	_velocity.y += 9.8
