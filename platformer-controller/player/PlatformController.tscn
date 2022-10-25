@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://player/platform-controller.gd" type="Script" id=1]
 [ext_resource path="res://player/player_base_sprite.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://player/player-idle-state.gd" type="Script" id=4]
 [ext_resource path="res://player/player-air-state.gd" type="Script" id=5]
 [ext_resource path="res://player/player-move-state.gd" type="Script" id=6]
+[ext_resource path="res://player/state-label.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -31,11 +32,12 @@ wait_time = 0.2
 one_shot = true
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
-margin_left = -23.0
-margin_top = 11.0
-margin_right = 22.0
-margin_bottom = 38.0
+margin_left = -16.0
+margin_top = -22.0
+margin_right = 29.0
+margin_bottom = 5.0
 text = "STATE"
+script = ExtResource( 7 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )

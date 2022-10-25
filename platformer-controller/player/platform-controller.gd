@@ -11,6 +11,12 @@ var _facing_right := true
 onready var sprite = $Sprite
 onready var jump_buffer = $JumpTimers/JumpBuffer
 onready var coyote_timer = $JumpTimers/CoyoteTimer
+onready var state_machine = $StateMachine
+onready var state_label = $StateLabel
+
+func _ready():
+	state_machine.connect("transitioned", state_label, "update_label")
+
 
 func _input(event):
 	# Check if jump input has been pressed (recently with buffer)
@@ -21,7 +27,6 @@ func _input(event):
 	# Check if should cancel jump early
 	if event.is_action_released("jump"):
 		jump_input = false
-		pass
 
 
 func _physics_process(delta):

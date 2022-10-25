@@ -13,6 +13,7 @@ func update(delta: float) -> void:
 		player.apply_acceleration(player.input_direction * player.acceleration * delta)
 		player.check_direction_facing()
 	
+	player.apply_gravity()
 	player.apply_movement()
 	
 	# If the player is not grounded, transition to the air state
