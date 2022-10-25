@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "PlatformController",
 "language": "GDScript",
 "path": "res://player/platform-controller.gd"
+}, {
+"base": "Node",
+"class": "PlayerState",
+"language": "GDScript",
+"path": "res://player/player-state.gd"
+}, {
+"base": "Node",
+"class": "PlayerStateMachine",
+"language": "GDScript",
+"path": "res://player/player-state-machine.gd"
 } ]
 _global_script_class_icons={
-"PlatformController": ""
+"PlatformController": "",
+"PlayerState": "",
+"PlayerStateMachine": ""
 }
 
 [application]

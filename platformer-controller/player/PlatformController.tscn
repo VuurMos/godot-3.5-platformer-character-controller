@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/platform-controller.gd" type="Script" id=1]
 [ext_resource path="res://player/player_base_sprite.png" type="Texture" id=2]
+[ext_resource path="res://player/player-state-machine.gd" type="Script" id=3]
+[ext_resource path="res://player/player-idle-state.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -25,3 +27,14 @@ one_shot = true
 [node name="CoyoteTimer" type="Timer" parent="JumpTimers"]
 wait_time = 0.2
 one_shot = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="Move" type="Node" parent="StateMachine"]
+
+[node name="Air" type="Node" parent="StateMachine"]

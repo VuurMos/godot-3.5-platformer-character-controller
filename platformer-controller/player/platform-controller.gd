@@ -1,5 +1,5 @@
-extends KinematicBody2D
 class_name PlatformController
+extends KinematicBody2D
 
 var max_speed := 120
 var acceleration := 500
