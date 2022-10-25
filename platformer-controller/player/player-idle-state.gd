@@ -5,6 +5,8 @@ func enter(msg := {}) -> void:
 	player.velocity = Vector2.ZERO
 
 func update(delta: float) -> void:
+	player.velocity.y = 0
+	
 	# If the player is not grounded, transition to the fall state
 	if !player.is_on_floor():
 		state_machine.transition_to("Fall")

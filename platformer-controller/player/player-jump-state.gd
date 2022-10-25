@@ -19,7 +19,7 @@ func update(delta: float) -> void:
 		player.apply_acceleration(player.input_direction * player.acceleration * delta)
 		player.check_direction_facing()
 	
-	player.apply_gravity()
+	player.apply_gravity(player.weak_gravity)
 	player.apply_movement()
 	
 	# If y velocity becomes positive, transition to fall state

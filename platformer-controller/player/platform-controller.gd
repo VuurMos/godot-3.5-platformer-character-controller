@@ -4,6 +4,10 @@ extends KinematicBody2D
 var max_speed := 120
 var acceleration := 500
 var friction := 400
+var jump_force := 200
+var weak_gravity := 10
+var strong_gravity := 20
+var max_fall_velocity := 400
 var velocity := Vector2.ZERO
 var input_direction := 0.0
 var jump_input := false
@@ -31,6 +35,7 @@ func _input(event):
 
 func _physics_process(delta):
 	input_direction = _get_input_direction()
+	print(velocity.y)
 
 
 func _get_input_direction():
@@ -61,15 +66,20 @@ func check_direction_facing():
 
 
 func add_jump_force():
-	velocity.y = -200
+	velocity.y = -jump_force
 	jump_buffer.stop()
 	coyote_timer.stop()
 
 
-func apply_gravity():
-	velocity.y += 9.8
+func apply_gravity(gravity):
+	velocity.y += gravity
 
 
 func apply_movement():
 	velocity.x = input_direction * max_speed
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+func clamp_fall_velocity():
+	if velocity.y > max_fall_velocity:
+		velocity.y = max_fall_velocity
