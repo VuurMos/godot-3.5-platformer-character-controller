@@ -16,14 +16,14 @@ func update(delta: float) -> void:
 	player.apply_gravity()
 	player.apply_movement()
 	
-	# If the player is not grounded, transition to the air state
+	# If the player is not grounded, transition to the fall state
 	if !player.is_on_floor():
-		state_machine.transition_to("Air")
+		state_machine.transition_to("Fall")
 		return
 	
-	# If the conditions for jump are valid, transition to the air state (jump)
+	# If the conditions for jump are valid, transition to the jump state
 	if !player.jump_buffer.is_stopped():
-		state_machine.transition_to("Air", {jump = true})
+		state_machine.transition_to("Jump")
 	
 	# If player x velocity == 0, transition to the idle state
 	if is_zero_approx(player.velocity.x):

@@ -1,17 +1,14 @@
-# Air State
+# Fall State
 extends PlayerState
 
 func enter(msg := {}) -> void:
-	# Jump if entering air state from jump input
-	if msg.has("jump"):
-		player.add_jump_force()
-	else:
-		player.coyote_timer.start()
+	# Start coyote time
+	player.coyote_timer.start()
 
 func update(delta: float) -> void:
 	# Coyote jump check
 	if !player.jump_buffer.is_stopped() and !player.coyote_timer.is_stopped():
-		player.add_jump_force()
+		state_machine.transition_to("Jump")
 	
 	# Player air movement
 	if is_zero_approx(player.input_direction):
