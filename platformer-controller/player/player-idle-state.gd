@@ -11,7 +11,6 @@ func update(delta: float) -> void:
 		return
 	
 	# If the conditions for jump are valid, transition to the air state (jump)
-	player.coyote_timer.start()
 	if !player.jump_buffer.is_stopped():
 		state_machine.transition_to("Air", {jump = true})
 	

@@ -5,7 +5,7 @@ func enter(msg := {}) -> void:
 	pass
 
 func update(delta: float) -> void:
-	# Player movement
+	# Player ground movement
 	if is_zero_approx(player.input_direction):
 		if !is_zero_approx(player.velocity.x):
 			player.apply_friction(player.friction * delta)
@@ -21,7 +21,6 @@ func update(delta: float) -> void:
 		return
 	
 	# If the conditions for jump are valid, transition to the air state (jump)
-	player.coyote_timer.start()
 	if !player.jump_buffer.is_stopped():
 		state_machine.transition_to("Air", {jump = true})
 	
