@@ -1,15 +1,20 @@
 # Idle State
 extends PlayerState
 
-func enter(_msg := {}) -> void:
-	owner.velocity = Vector2.ZERO
+func enter(msg := {}) -> void:
+	player.velocity = Vector2.ZERO
 
 func update(delta: float) -> void:
-	if !owner.is_on_floor():
+	# If the player is not grounded, transition to the air state
+	if !player.is_on_floor():
 		state_machine.transition_to("Air")
 		return
 	
-	if Input.is_action_just_pressed("jump"):
+	# If the conditions for jump are valid, transition to the air state (jump)
+	player.coyote_timer.start()
+	if !player.jump_buffer.is_stopped():
 		state_machine.transition_to("Air", {jump = true})
-	elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
-		state_machine.transition_to("Run")
+	
+	# If player direction input or x velocity != 0, transition to the move state
+	if !is_zero_approx(player.input_direction) or !is_zero_approx(player.velocity.x):
+		state_machine.transition_to("Move")

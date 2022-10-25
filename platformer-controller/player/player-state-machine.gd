@@ -11,7 +11,8 @@ onready var state: PlayerState = get_node(initial_state)
 func _ready() -> void:
 	yield(owner, "ready")
 	for child in get_children():
-		child.state_machine = self
+#		child.state_machine = self
+		child.set_state_machine(self)
 	state.enter()
 
 

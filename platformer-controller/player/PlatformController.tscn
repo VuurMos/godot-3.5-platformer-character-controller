@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/platform-controller.gd" type="Script" id=1]
 [ext_resource path="res://player/player_base_sprite.png" type="Texture" id=2]
 [ext_resource path="res://player/player-state-machine.gd" type="Script" id=3]
 [ext_resource path="res://player/player-idle-state.gd" type="Script" id=4]
+[ext_resource path="res://player/player-air-state.gd" type="Script" id=5]
+[ext_resource path="res://player/player-move-state.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -28,6 +30,13 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
+[node name="StateLabel" type="RichTextLabel" parent="."]
+margin_left = -23.0
+margin_top = 11.0
+margin_right = 22.0
+margin_bottom = 38.0
+text = "STATE"
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 initial_state = NodePath("Idle")
@@ -36,5 +45,7 @@ initial_state = NodePath("Idle")
 script = ExtResource( 4 )
 
 [node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
 
 [node name="Air" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
