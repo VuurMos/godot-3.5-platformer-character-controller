@@ -19,7 +19,13 @@ func update(delta: float) -> void:
 		player.apply_acceleration(player.input_direction * player.acceleration * delta)
 		player.check_direction_facing()
 	
-	player.apply_gravity(player.weak_gravity)
+	# Jump cancel (variable jump height)
+	if player.velocity.y > player.minimum_jump_velocity and !player.jump_input:
+		player.apply_gravity(player.strong_gravity)
+		print("jump cancelled")
+	else:
+		player.apply_gravity(player.weak_gravity)
+		print("full jump")
 	player.apply_movement()
 	
 	# If y velocity becomes positive, transition to fall state

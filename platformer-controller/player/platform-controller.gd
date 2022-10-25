@@ -4,10 +4,11 @@ extends KinematicBody2D
 var max_speed := 120
 var acceleration := 500
 var friction := 400
-var jump_force := 200
+var jump_force := 300
 var weak_gravity := 10
 var strong_gravity := 20
 var max_fall_velocity := 400
+var minimum_jump_velocity = -0.9 * jump_force
 var velocity := Vector2.ZERO
 var input_direction := 0.0
 var jump_input := false
@@ -35,7 +36,6 @@ func _input(event):
 
 func _physics_process(delta):
 	input_direction = _get_input_direction()
-	print(velocity.y)
 
 
 func _get_input_direction():
