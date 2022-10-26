@@ -10,6 +10,16 @@ func update(delta: float) -> void:
 	# Coyote jump check
 	if !player.jump_buffer.is_stopped() and !player.coyote_timer.is_stopped():
 		player.add_jump_force()
+		player.coyote_timer.stop()
+	
+	# Jump cancel (variable jump height)
+	# Note: can also check a y velocity for minimum jump before cancelling
+	if !player.jump_input:
+		player.apply_gravity(player.strong_gravity)
+		print("jump cancelled")
+	else:
+		player.apply_gravity(player.weak_gravity)
+		print("full jump")
 	
 	# Player air movement
 	if is_zero_approx(player.input_direction):
@@ -19,13 +29,6 @@ func update(delta: float) -> void:
 		player.apply_acceleration(player.input_direction * player.acceleration * delta)
 		player.check_direction_facing()
 	
-	# Jump cancel (variable jump height)
-	if player.velocity.y > player.minimum_jump_velocity and !player.jump_input:
-		player.apply_gravity(player.strong_gravity)
-		print("jump cancelled")
-	else:
-		player.apply_gravity(player.weak_gravity)
-		print("full jump")
 	player.apply_movement()
 	
 	# If y velocity becomes positive, transition to fall state

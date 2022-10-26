@@ -3,7 +3,9 @@ extends PlayerState
 
 func enter(msg := {}) -> void:
 	# Start coyote time
-	player.coyote_timer.start()
+	# TODO: Need to only start this is transitioning from grounded state!
+	if msg.has("from_ground"):
+		player.coyote_timer.start()
 
 func update(delta: float) -> void:
 	# Coyote jump check
