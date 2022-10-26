@@ -3,15 +3,20 @@ extends PlayerState
 
 func enter(msg := {}) -> void:
 	# Start coyote time
-	# TODO: Need to only start this is transitioning from grounded state!
 	if msg.has("from_ground"):
 		player.coyote_timer.start()
+
 
 func update(delta: float) -> void:
 	# Coyote jump check
 	if !player.jump_buffer.is_stopped() and !player.coyote_timer.is_stopped():
 		state_machine.transition_to("Jump")
 	
+	# Air jump check
+	if !player.jump_buffer.is_stopped() and player.current_air_jumps > 0:
+		player.current_air_jumps -= 1
+		state_machine.transition_to("Jump")
+
 	# Player air movement
 	if is_zero_approx(player.input_direction):
 		if !is_zero_approx(player.velocity.x):

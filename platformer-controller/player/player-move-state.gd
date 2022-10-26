@@ -2,7 +2,8 @@
 extends PlayerState
 
 func enter(msg := {}) -> void:
-	pass
+	player.current_air_jumps = player.max_air_jumps
+
 
 func update(delta: float) -> void:
 	# Player ground movement

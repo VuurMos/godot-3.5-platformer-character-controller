@@ -7,10 +7,10 @@ func enter(msg := {}) -> void:
 
 
 func update(delta: float) -> void:
-	# Coyote jump check
-	if !player.jump_buffer.is_stopped() and !player.coyote_timer.is_stopped():
-		player.add_jump_force()
-		player.coyote_timer.stop()
+	# Air jumps check
+	if !player.jump_buffer.is_stopped() and player.current_air_jumps > 0:
+		player.current_air_jumps -= 1
+		state_machine.transition_to("Jump")
 	
 	# Jump cancel (variable jump height)
 	# Note: can also check a y velocity for minimum jump before cancelling
