@@ -18,16 +18,10 @@ func update(delta: float) -> void:
 		state_machine.transition_to("Jump")
 
 	# Player air movement
-	if is_zero_approx(player.input_direction):
-		if !is_zero_approx(player.velocity.x):
-			player.apply_friction(player.friction * delta)
-	else:
-		player.apply_acceleration(player.input_direction * player.acceleration * delta)
+	if !is_zero_approx(player.input_direction):
 		player.check_direction_facing()
-	
-	player.apply_gravity(player.strong_gravity)
+	player.apply_fall_gravity()
 	player.apply_movement()
-	player.clamp_fall_velocity()
 	
 	# If grounded, transition to move or idle states
 	if player.is_on_floor():
