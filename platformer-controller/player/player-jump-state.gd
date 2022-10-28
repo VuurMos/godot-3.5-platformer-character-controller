@@ -22,10 +22,7 @@ func update(delta: float) -> void:
 		print("full jump")
 	
 	# Player air movement
-	if !is_zero_approx(player.input_direction):
-		player.check_direction_facing()
-	
-	player.apply_movement()
+	player.apply_smooth_movement()
 	
 	# If y velocity becomes positive, transition to fall state
 	if player.velocity.y > 0:

@@ -6,10 +6,8 @@ func enter(msg := {}) -> void:
 
 
 func update(delta: float) -> void:
-	if !is_zero_approx(player.input_direction):
-		player.check_direction_facing()
 	player.velocity.y = 0
-	player.apply_movement()
+	player.apply_smooth_movement()
 	
 	# If the player is not grounded, transition to the fall state
 	if !player.is_on_floor():

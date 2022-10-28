@@ -7,8 +7,8 @@ var velocity = Vector2.ZERO
 var max_speed := 10 * TILE_SIZE
 
 # TODO: Acceleration and deacceleration for movement
-#var acceleration_time := 6
-#var deacceleration_time := 3
+var acceleration_time := max_speed / 6 * 0.5
+var deacceleration_time := max_speed / 3
 
 var input_direction = 0.0
 var _facing_right := true
@@ -17,8 +17,8 @@ var jump_input := false
 var allow_double_jump := false
 
 # Jump and fall kinematics
-var jump_height = 6 * TILE_SIZE
-var jump_x_dist = 4 * TILE_SIZE
+var jump_height = 4 * TILE_SIZE
+var jump_x_dist = 3 * TILE_SIZE
 var fall_x_dist = 1.75 * TILE_SIZE
 
 var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
@@ -51,7 +51,7 @@ func _input(event):
 
 
 func _physics_process(delta):
-	print(velocity.y)
+	print(velocity.x)
 	input_direction = _get_input_direction()
 
 
@@ -85,11 +85,33 @@ func apply_fall_gravity():
 # Apply movement with no acceleration or friction
 func apply_movement():
 	velocity.x = input_direction * max_speed
-	# Clamp fall speed
-	if velocity.y >= max_fall_velocity:
-		velocity.y = max_fall_velocity
+	clamp_fall_speed()
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+
+func apply_smooth_movement():
+	if is_zero_approx(input_direction):
+		if !is_zero_approx(velocity.x):
+			apply_friction()
+	else:
+		apply_acceleration()
+		check_direction_facing()
+	
+	clamp_fall_speed()
+	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+func apply_friction():
+	velocity.x = move_toward(velocity.x, 0, deacceleration_time)
+
+
+func apply_acceleration():
+	velocity.x = move_toward(velocity.x, max_speed * input_direction, acceleration_time)
+
+
+func clamp_fall_speed():
+	if velocity.y >= max_fall_velocity:
+		velocity.y = max_fall_velocity
 
 #func apply_acc_movement():
 #	if is_zero_approx(input_direction):
