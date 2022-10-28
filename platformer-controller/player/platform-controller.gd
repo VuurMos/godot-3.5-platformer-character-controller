@@ -7,8 +7,8 @@ var velocity = Vector2.ZERO
 var max_speed := 10 * TILE_SIZE
 
 # TODO: Acceleration and deacceleration for movement
-var acceleration_time := 6
-var deacceleration_time := 3
+#var acceleration_time := 6
+#var deacceleration_time := 3
 
 var input_direction = 0.0
 var _facing_right := true
@@ -18,7 +18,7 @@ var allow_double_jump := false
 
 # Jump and fall kinematics
 var jump_height = 6 * TILE_SIZE
-var jump_x_dist = 3 * TILE_SIZE
+var jump_x_dist = 4 * TILE_SIZE
 var fall_x_dist = 1.75 * TILE_SIZE
 
 var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
@@ -26,8 +26,8 @@ var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
 var jump_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(jump_x_dist, 2)
 var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
 
-# TODO: Clamp fall speed - figure out basic jump / fall values first
-#var max_fall_velocity := 400
+# Clamp fall speed
+var max_fall_velocity = jump_velocity * 0.75
 
 onready var sprite = $Sprite
 onready var jump_buffer = $JumpTimers/JumpBuffer
@@ -51,6 +51,7 @@ func _input(event):
 
 
 func _physics_process(delta):
+	print(velocity.y)
 	input_direction = _get_input_direction()
 
 
@@ -85,23 +86,24 @@ func apply_fall_gravity():
 func apply_movement():
 	velocity.x = input_direction * max_speed
 	# Clamp fall speed
-#	if velocity.y >= max_fall_velocity:
-#		velocity.y = max_fall_velocity
+	if velocity.y >= max_fall_velocity:
+		velocity.y = max_fall_velocity
 	velocity = move_and_slide(velocity, Vector2.UP)
 
 
-
-
-
-
-
-#var current_speed := 0.0
-#var acceleration := 20 * TILE_SIZE
-#var friction := 20 * TILE_SIZE
-
+#func apply_acc_movement():
+#	if is_zero_approx(input_direction):
+#		if !is_zero_approx(velocity.x):
+#			apply_friction(deacceleration_time * get_physics_process_delta_time())
+#	else:
+#		apply_acceleration(input_direction * acceleration_time * get_physics_process_delta_time())
+#		check_direction_facing()
+#
+#
 #func apply_friction(_amount : float):
 #	if velocity.x > _amount:
-#		velocity.x -= velocity.x * _amount
+##		velocity.x.move_towards()
+#		pass
 #	else:
 #		velocity.x = 0.0
 #
@@ -109,17 +111,3 @@ func apply_movement():
 #func apply_acceleration(_amount : float):
 #	velocity.x += _amount
 #	velocity.x = clamp(velocity.x, -max_speed, max_speed)
-#
-#
-#func apply_movement_with_acc_and_fric():
-#	if is_zero_approx(input_direction):
-#		if !is_zero_approx(velocity.x):
-#			apply_friction(friction * get_physics_process_delta_time())
-#	else:
-#		apply_acceleration(input_direction * acceleration * get_physics_process_delta_time())
-#		check_direction_facing()
-
-#	velocity.x = clamp(velocity.x, -max_speed, max_speed
-#	if velocity.y >= max_fall_velocity:
-#		velocity.y = max_fall_velocity
-#	velocity = move_and_slide(velocity, Vector2.UP)
