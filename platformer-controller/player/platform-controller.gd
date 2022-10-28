@@ -5,9 +5,7 @@ const TILE_SIZE := 16
 
 var velocity = Vector2.ZERO
 var max_speed := 10 * TILE_SIZE
-
-# TODO: Acceleration and deacceleration for movement
-var acceleration_time := max_speed / 6 * 0.5
+var acceleration_time := max_speed / 6
 var deacceleration_time := max_speed / 3
 
 var input_direction = 0.0
@@ -35,6 +33,7 @@ onready var coyote_timer = $JumpTimers/CoyoteTimer
 onready var state_machine = $StateMachine
 onready var state_label = $StateLabel
 
+
 func _ready():
 	state_machine.connect("transitioned", state_label, "update_label")
 
@@ -51,7 +50,7 @@ func _input(event):
 
 
 func _physics_process(delta):
-	print(velocity.x)
+	print(velocity.y)
 	input_direction = _get_input_direction()
 
 
@@ -59,6 +58,7 @@ func _get_input_direction():
 	var input = 0.0
 	input = Input.get_action_strength("right") - Input.get_action_strength("left")
 	return input
+
 
 func check_direction_facing():
 	if velocity.x > 0:
@@ -81,6 +81,7 @@ func apply_jump_gravity():
 
 func apply_fall_gravity():
 	velocity.y += fall_gravity * get_physics_process_delta_time()
+
 
 # Apply movement with no acceleration or friction
 func apply_movement():
@@ -112,24 +113,3 @@ func apply_acceleration():
 func clamp_fall_speed():
 	if velocity.y >= max_fall_velocity:
 		velocity.y = max_fall_velocity
-
-#func apply_acc_movement():
-#	if is_zero_approx(input_direction):
-#		if !is_zero_approx(velocity.x):
-#			apply_friction(deacceleration_time * get_physics_process_delta_time())
-#	else:
-#		apply_acceleration(input_direction * acceleration_time * get_physics_process_delta_time())
-#		check_direction_facing()
-#
-#
-#func apply_friction(_amount : float):
-#	if velocity.x > _amount:
-##		velocity.x.move_towards()
-#		pass
-#	else:
-#		velocity.x = 0.0
-#
-#
-#func apply_acceleration(_amount : float):
-#	velocity.x += _amount
-#	velocity.x = clamp(velocity.x, -max_speed, max_speed)

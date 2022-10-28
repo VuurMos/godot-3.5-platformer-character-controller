@@ -1,6 +1,7 @@
 # Idle State
 extends PlayerState
 
+
 func enter(msg := {}) -> void:
 	player.velocity = Vector2.ZERO
 	player.allow_double_jump = true

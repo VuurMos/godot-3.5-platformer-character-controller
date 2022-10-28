@@ -1,6 +1,7 @@
 # Fall State
 extends PlayerState
 
+
 func enter(msg := {}) -> void:
 	# Start coyote time
 	if msg.has("from_ground"):
@@ -13,10 +14,11 @@ func update(delta: float) -> void:
 		state_machine.transition_to("Jump")
 	
 #	# Double jump check
-#	if !player.jump_buffer.is_stopped() and player.allow_double_jump:
-#		player.allow_double_jump = false
-#		state_machine.transition_to("Jump")
-
+	if !player.jump_buffer.is_stopped() and player.allow_double_jump:
+		player.allow_double_jump = false
+		player.velocity.y = 0
+		state_machine.transition_to("Jump")
+	
 	# Player air movement
 	player.apply_fall_gravity()
 	player.apply_smooth_movement()

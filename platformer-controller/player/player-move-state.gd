@@ -1,6 +1,7 @@
 # Move State
 extends PlayerState
 
+
 func enter(msg := {}) -> void:
 	player.allow_double_jump = true
 
