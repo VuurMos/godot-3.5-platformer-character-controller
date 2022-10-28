@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://player/PlatformController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://platform/TestPlatform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://platform/testbg.png" type="Texture" id=3]
 
 [node name="Game" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -1 )
+texture = ExtResource( 3 )
 
 [node name="PlatformController" parent="." instance=ExtResource( 1 )]
 
@@ -11,13 +16,14 @@
 current = true
 
 [node name="TestPlatform" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 48 )
+position = Vector2( 0, 112 )
+scale = Vector2( 4, 1 )
 
 [node name="TestPlatform2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 139, 16 )
+position = Vector2( 120, 80 )
 
 [node name="TestPlatform3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 273, -23 )
+position = Vector2( -120, 16 )
 
 [node name="TestPlatform4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 419, -83 )
+position = Vector2( 120, -48 )

@@ -3,7 +3,7 @@ extends PlayerState
 
 func enter(msg := {}) -> void:
 	player.velocity = Vector2.ZERO
-	player.current_air_jumps = player.max_air_jumps
+	player.allow_double_jump = true
 
 
 func update(delta: float) -> void:

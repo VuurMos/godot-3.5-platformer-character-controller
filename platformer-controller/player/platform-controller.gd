@@ -2,31 +2,33 @@ class_name PlatformController
 extends KinematicBody2D
 
 const TILE_SIZE := 16
-var max_speed := 8 * TILE_SIZE
-var current_speed := 0.0
-var acceleration := 20 * TILE_SIZE
-var friction := 20 * TILE_SIZE
-# TODO: Jump Kinematics
-var max_jump_height = 4 * TILE_SIZE
-var min_jump_height = 2 * TILE_SIZE
-var jump_duration = 0.25
 
-#var jump_velocity = 2 * max_jump_height / jump_duration
-var jump_gravity = 2 * max_jump_height / pow(jump_duration, 2)
-var fall_gravity = 2 * min_jump_height / pow(jump_duration, 2)
+var velocity = Vector2.ZERO
+var max_speed := 10 * TILE_SIZE
 
-var jump_velocity = -sqrt(2* jump_gravity * max_jump_height)
+# TODO: Acceleration and deacceleration for movement
+var acceleration_time := 6
+var deacceleration_time := 3
 
-var jump_force := 300
-var weak_gravity := 10
-var strong_gravity := 20
-var max_fall_velocity := 400
-var max_air_jumps := 0
-var current_air_jumps := 0
-var velocity := Vector2.ZERO
-var input_direction := 0.0
-var jump_input := false
+var input_direction = 0.0
 var _facing_right := true
+
+var jump_input := false
+var allow_double_jump := false
+
+# Jump and fall kinematics
+var jump_height = 6 * TILE_SIZE
+var jump_x_dist = 3 * TILE_SIZE
+var fall_x_dist = 1.75 * TILE_SIZE
+
+var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
+
+var jump_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(jump_x_dist, 2)
+var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
+
+# TODO: Clamp fall speed - figure out basic jump / fall values first
+#var max_fall_velocity := 400
+
 onready var sprite = $Sprite
 onready var jump_buffer = $JumpTimers/JumpBuffer
 onready var coyote_timer = $JumpTimers/CoyoteTimer
@@ -67,7 +69,7 @@ func check_direction_facing():
 
 
 func add_jump_velocity():
-	velocity.y = jump_velocity
+	velocity.y = -jump_velocity
 	jump_buffer.stop()
 	coyote_timer.stop()
 
@@ -79,15 +81,23 @@ func apply_jump_gravity():
 func apply_fall_gravity():
 	velocity.y += fall_gravity * get_physics_process_delta_time()
 
-
 # Apply movement with no acceleration or friction
 func apply_movement():
 	velocity.x = input_direction * max_speed
 	# Clamp fall speed
-	if velocity.y >= max_fall_velocity:
-		velocity.y = max_fall_velocity
+#	if velocity.y >= max_fall_velocity:
+#		velocity.y = max_fall_velocity
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+
+
+
+
+
+
+#var current_speed := 0.0
+#var acceleration := 20 * TILE_SIZE
+#var friction := 20 * TILE_SIZE
 
 #func apply_friction(_amount : float):
 #	if velocity.x > _amount:

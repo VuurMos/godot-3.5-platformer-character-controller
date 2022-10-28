@@ -12,10 +12,10 @@ func update(delta: float) -> void:
 	if !player.jump_buffer.is_stopped() and !player.coyote_timer.is_stopped():
 		state_machine.transition_to("Jump")
 	
-	# Air jump check
-	if !player.jump_buffer.is_stopped() and player.current_air_jumps > 0:
-		player.current_air_jumps -= 1
-		state_machine.transition_to("Jump")
+#	# Double jump check
+#	if !player.jump_buffer.is_stopped() and player.allow_double_jump:
+#		player.allow_double_jump = false
+#		state_machine.transition_to("Jump")
 
 	# Player air movement
 	if !is_zero_approx(player.input_direction):
