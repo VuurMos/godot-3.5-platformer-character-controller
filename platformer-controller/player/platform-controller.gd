@@ -83,14 +83,7 @@ func apply_fall_gravity():
 	velocity.y += fall_gravity * get_physics_process_delta_time()
 
 
-# Apply movement with no acceleration or friction
 func apply_movement():
-	velocity.x = input_direction * max_speed
-	clamp_fall_speed()
-	velocity = move_and_slide(velocity, Vector2.UP)
-
-
-func apply_smooth_movement():
 	if is_zero_approx(input_direction):
 		if !is_zero_approx(velocity.x):
 			apply_friction()

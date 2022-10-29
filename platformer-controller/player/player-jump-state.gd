@@ -21,7 +21,7 @@ func update(delta: float) -> void:
 		player.apply_jump_gravity()
 	
 	# Player air movement
-	player.apply_smooth_movement()
+	player.apply_movement()
 	
 	# If y velocity becomes positive, transition to fall state
 	if player.velocity.y > 0:

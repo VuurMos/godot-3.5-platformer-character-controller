@@ -20,7 +20,7 @@ func update(delta: float) -> void:
 	
 	# Player air movement
 	player.apply_fall_gravity()
-	player.apply_smooth_movement()
+	player.apply_movement()
 	
 	# If grounded, transition to move or idle states
 	if player.is_on_floor():

@@ -8,7 +8,7 @@ func enter(msg := {}) -> void:
 
 func update(delta: float) -> void:
 	player.velocity.y = 0
-	player.apply_smooth_movement()
+	player.apply_movement()
 	
 	# If the player is not grounded, transition to the fall state
 	if !player.is_on_floor():
