@@ -12,11 +12,9 @@ func update(delta: float) -> void:
 #	# Double jump check
 	if !player.jump_buffer.is_stopped() and player.allow_double_jump:
 		player.allow_double_jump = false
-		player.velocity.y = 0
 		state_machine.transition_to("Jump")
 	
 #	# Jump cancel (variable jump height)
-#	# Note: can also check a y velocity for minimum jump before cancelling
 	if !player.jump_input:
 		player.apply_fall_gravity()
 	else:

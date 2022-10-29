@@ -16,7 +16,6 @@ func update(delta: float) -> void:
 #	# Double jump check
 	if !player.jump_buffer.is_stopped() and player.allow_double_jump:
 		player.allow_double_jump = false
-		player.velocity.y = 0
 		state_machine.transition_to("Jump")
 	
 	# Player air movement
