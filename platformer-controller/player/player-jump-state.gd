@@ -19,4 +19,8 @@ func update(delta: float) -> void:
 	if !player.jump_input:
 		player.apply_fall_gravity()
 	else:
-		player.apply_jump_gravity()
+		if player.velocity.y >= player.low_grav_apex_threshold:
+			player.apply_apex_gravity()
+			print("low grav!")
+		else:
+			player.apply_jump_gravity()

@@ -22,10 +22,14 @@ var fall_x_dist = 1.75 * TILE_SIZE
 var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
 
 var jump_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(jump_x_dist, 2)
+
+var low_grav_apex_threshold = -10
+var jump_apex_gravity = jump_gravity * 0.1
+
 var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
 
 # Clamp fall speed
-var max_fall_velocity = jump_velocity * 0.75
+var max_fall_velocity = jump_velocity * 0.85
 
 onready var sprite = $Sprite
 onready var jump_buffer = $JumpTimers/JumpBuffer
@@ -78,20 +82,12 @@ func apply_jump_gravity():
 	velocity.y += jump_gravity * get_physics_process_delta_time()
 
 
+func apply_apex_gravity():
+	velocity.y += jump_apex_gravity * get_physics_process_delta_time()
+
+
 func apply_fall_gravity():
 	velocity.y += fall_gravity * get_physics_process_delta_time()
-
-
-func apply_movement():
-	if is_zero_approx(input_direction):
-		if !is_zero_approx(velocity.x):
-			apply_friction()
-	else:
-		apply_acceleration()
-		check_direction_facing()
-	
-	clamp_fall_speed()
-	velocity = move_and_slide(velocity, Vector2.UP)
 
 
 func apply_friction():
@@ -105,3 +101,15 @@ func apply_acceleration():
 func clamp_fall_speed():
 	if velocity.y >= max_fall_velocity:
 		velocity.y = max_fall_velocity
+
+
+func apply_movement():
+	if is_zero_approx(input_direction):
+		if !is_zero_approx(velocity.x):
+			apply_friction()
+	else:
+		apply_acceleration()
+		check_direction_facing()
+	
+	clamp_fall_speed()
+	velocity = move_and_slide(velocity, Vector2.UP)
