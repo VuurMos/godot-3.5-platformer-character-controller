@@ -15,7 +15,7 @@ var jump_input := false
 var allow_double_jump := false
 
 # Jump and fall kinematics
-var jump_height = 4 * TILE_SIZE
+var jump_height = 3 * TILE_SIZE
 var jump_x_dist = 3 * TILE_SIZE
 var fall_x_dist = 1.75 * TILE_SIZE
 

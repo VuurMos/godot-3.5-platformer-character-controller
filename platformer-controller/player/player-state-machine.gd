@@ -30,8 +30,9 @@ func _physics_process(delta: float) -> void:
 func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	if not has_node(target_state_name):
 		return
-
+	
 	state.exit()
+	# TODO: swap node search for direct node paths
 	state = get_node(target_state_name)
 	state.enter(msg)
 	emit_signal("transitioned", state.name)
