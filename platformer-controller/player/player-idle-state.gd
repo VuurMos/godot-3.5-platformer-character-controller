@@ -13,7 +13,6 @@ func update(delta: float) -> void:
 	# If the player is not grounded, transition to the fall state
 	if !player.is_on_floor():
 		state_machine.transition_to("Fall", {from_ground = true})
-		return
 	
 	# If the conditions for jump are valid, transition to the jump state
 	if !player.jump_buffer.is_stopped():

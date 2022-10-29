@@ -50,7 +50,6 @@ func _input(event):
 
 
 func _physics_process(delta):
-	print(jump_input)
 	input_direction = _get_input_direction()
 
 
