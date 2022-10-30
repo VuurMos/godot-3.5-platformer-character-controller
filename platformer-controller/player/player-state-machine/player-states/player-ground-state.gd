@@ -3,7 +3,7 @@ extends PlayerState
 
 
 func enter(msg := {}) -> void:
-	player.allow_double_jump = true
+	pass
 
 
 func check_ground_transitions():	

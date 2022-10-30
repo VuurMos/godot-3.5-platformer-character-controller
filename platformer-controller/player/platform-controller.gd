@@ -12,7 +12,6 @@ var input_direction = 0.0
 var _facing_right := true
 
 var jump_input := false
-var allow_double_jump := false
 
 # Jump and fall kinematics
 var jump_height = 3 * TILE_SIZE
@@ -22,8 +21,8 @@ var fall_x_dist = 1.75 * TILE_SIZE
 var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
 var jump_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(jump_x_dist, 2)
 
-var low_grav_apex_threshold = -15
-var jump_apex_gravity = jump_gravity * 0.1
+var low_grav_apex_threshold = -20
+var jump_apex_gravity = jump_gravity * 0.5
 
 var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
 var max_fall_velocity = jump_velocity * 0.85
