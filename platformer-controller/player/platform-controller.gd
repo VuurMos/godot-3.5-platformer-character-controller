@@ -54,7 +54,6 @@ func _input(event):
 
 
 func _physics_process(delta):
-	print(state_machine.state)
 	input_direction = _get_input_direction()
 
 

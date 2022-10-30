@@ -11,10 +11,11 @@ func enter(msg := {}) -> void:
 
 
 func update(delta: float) -> void:
-	# Jump check with coyote time
+	player.apply_fall_gravity()
+	player.apply_movement()
+	
+	# Jump check - needs to be before double jump check!
 	if !player.jump_buffer.is_stopped() and !player.coyote_timer.is_stopped():
 		state_machine.transition_to("Jump")
 	
-	.update(delta)
-	
-	player.apply_fall_gravity()
+	check_air_transitions()

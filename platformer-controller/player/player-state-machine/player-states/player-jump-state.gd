@@ -9,12 +9,6 @@ func enter(msg := {}) -> void:
 
 
 func update(delta: float) -> void:
-	# If y velocity becomes positive, transition to fall state
-	if player.velocity.y > 0:
-		state_machine.transition_to("Fall")
-	
-	.update(delta)
-	
 		# Jump cancel (variable jump height)
 	if !player.jump_input:
 		player.apply_fall_gravity()
@@ -24,3 +18,11 @@ func update(delta: float) -> void:
 			print("low grav!")
 		else:
 			player.apply_jump_gravity()
+	
+	player.apply_movement()
+	
+	check_air_transitions()
+	
+	# If y velocity becomes positive, transition to fall state
+	if player.velocity.y > 0:
+		state_machine.transition_to("Fall")
