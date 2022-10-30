@@ -14,5 +14,6 @@ func update(delta: float) -> void:
 	check_ground_transitions()
 	
 	# If player x velocity == 0, transition to the idle state
-	if is_zero_approx(player.velocity.x):
+	if abs(player.velocity.x) < 0.01:
+		player.velocity.x = 0
 		state_machine.transition_to("Idle")
