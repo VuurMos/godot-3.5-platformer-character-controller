@@ -20,25 +20,25 @@ var jump_x_dist = 3 * TILE_SIZE
 var fall_x_dist = 1.75 * TILE_SIZE
 
 var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
-
 var jump_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(jump_x_dist, 2)
 
-var low_grav_apex_threshold = -10
+var low_grav_apex_threshold = -15
 var jump_apex_gravity = jump_gravity * 0.1
 
 var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
-
-# Clamp fall speed
 var max_fall_velocity = jump_velocity * 0.85
 
 onready var sprite = $Sprite
-onready var jump_buffer = $JumpTimers/JumpBuffer
-onready var coyote_timer = $JumpTimers/CoyoteTimer
+onready var cam = $PlayerCamera
+onready var jump_buffer = $StateTimers/JumpBuffer
+onready var coyote_timer = $StateTimers/CoyoteTimer
+onready var fall_timer = $StateTimers/FallTimer
 onready var state_machine = $StateMachine
 onready var state_label = $StateLabel
 
 
 func _ready():
+	cam.target = self
 	state_machine.connect("transitioned", state_label, "update_label")
 
 
@@ -54,6 +54,7 @@ func _input(event):
 
 
 func _physics_process(delta):
+	print(state_machine.state)
 	input_direction = _get_input_direction()
 
 

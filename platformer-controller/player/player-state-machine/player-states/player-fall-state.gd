@@ -6,6 +6,8 @@ func enter(msg := {}) -> void:
 	# Start coyote time
 	if msg.has("from_ground"):
 		player.coyote_timer.start()
+	
+	player.fall_timer.start()
 
 
 func update(delta: float) -> void:

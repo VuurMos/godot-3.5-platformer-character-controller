@@ -14,7 +14,4 @@ func update(delta: float) -> void:
 	
 	# If grounded, transition to move or idle states
 	if player.is_on_floor():
-		if is_zero_approx(player.velocity.x):
-			state_machine.transition_to("Idle")
-		else:
-			state_machine.transition_to("Move")
+		state_machine.transition_to("Land")

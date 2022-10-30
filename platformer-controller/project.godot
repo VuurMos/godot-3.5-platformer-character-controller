@@ -17,26 +17,32 @@ _global_script_classes=[ {
 "base": "PlayerState",
 "class": "PlayerAirState",
 "language": "GDScript",
-"path": "res://player/player-air-state.gd"
+"path": "res://player/player-state-machine/player-states/player-air-state.gd"
+}, {
+"base": "Camera2D",
+"class": "PlayerCamera",
+"language": "GDScript",
+"path": "res://player/player-cam/player-cam.gd"
 }, {
 "base": "PlayerState",
 "class": "PlayerGroundState",
 "language": "GDScript",
-"path": "res://player/player-ground-state.gd"
+"path": "res://player/player-state-machine/player-states/player-ground-state.gd"
 }, {
 "base": "Node",
 "class": "PlayerState",
 "language": "GDScript",
-"path": "res://player/player-state.gd"
+"path": "res://player/player-state-machine/player-states/player-state.gd"
 }, {
 "base": "Node",
 "class": "PlayerStateMachine",
 "language": "GDScript",
-"path": "res://player/player-state-machine.gd"
+"path": "res://player/player-state-machine/player-state-machine.gd"
 } ]
 _global_script_class_icons={
 "PlatformController": "",
 "PlayerAirState": "",
+"PlayerCamera": "",
 "PlayerGroundState": "",
 "PlayerState": "",
 "PlayerStateMachine": ""
@@ -47,6 +53,10 @@ _global_script_class_icons={
 config/name="platformer-controller"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Events="*res://globals/events.gd"
 
 [display]
 
@@ -117,4 +127,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
