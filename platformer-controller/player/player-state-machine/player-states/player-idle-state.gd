@@ -4,6 +4,7 @@ extends PlayerGroundState
 
 func enter(msg := {}) -> void:
 	.enter(msg)
+	print("idle state")
 
 
 func update(delta: float) -> void:

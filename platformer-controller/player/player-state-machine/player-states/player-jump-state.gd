@@ -6,6 +6,7 @@ func enter(msg := {}) -> void:
 	#Add initial jump force
 	player.velocity.y = 0
 	player.add_jump_velocity()
+	print("jump state")
 
 
 func update(delta: float) -> void:
@@ -15,7 +16,6 @@ func update(delta: float) -> void:
 	else:
 		if player.velocity.y >= player.low_grav_apex_threshold:
 			player.apply_apex_gravity()
-			print("low grav!")
 		else:
 			player.apply_jump_gravity()
 	

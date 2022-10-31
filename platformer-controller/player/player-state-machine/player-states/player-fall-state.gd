@@ -8,6 +8,8 @@ func enter(msg := {}) -> void:
 		player.coyote_timer.start()
 	
 	player.fall_timer.start()
+	
+	print("fall state")
 
 
 func update(delta: float) -> void:

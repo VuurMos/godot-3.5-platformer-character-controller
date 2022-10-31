@@ -4,6 +4,7 @@ extends PlayerGroundState
 
 func enter(msg := {}) -> void:
 	.enter(msg)
+	print("move state")
 
 
 func update(delta: float) -> void:
@@ -11,9 +12,9 @@ func update(delta: float) -> void:
 	player.apply_fall_gravity()
 	player.apply_movement()
 	
-	check_ground_transitions()
-	
 	# If player x velocity == 0, transition to the idle state
 	if abs(player.velocity.x) < 0.01:
 		player.velocity.x = 0
 		state_machine.transition_to("Idle")
+	
+	check_ground_transitions()
