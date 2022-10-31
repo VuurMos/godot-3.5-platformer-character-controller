@@ -17,6 +17,7 @@ func physics_update(delta: float) -> void:
 		else:
 			player.apply_jump_gravity()
 	
+	player.clamp_fall_speed()
 	player.apply_movement()
 	
 	check_air_transitions()

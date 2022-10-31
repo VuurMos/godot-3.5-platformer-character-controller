@@ -12,6 +12,7 @@ func enter(msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	player.apply_fall_gravity()
+	player.clamp_fall_speed()
 	player.apply_movement()
 	
 	# Jump check - needs to be before double jump check!

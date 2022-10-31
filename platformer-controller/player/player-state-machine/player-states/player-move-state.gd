@@ -9,6 +9,7 @@ func enter(msg := {}) -> void:
 func physics_update(delta: float) -> void:
 	# Need to apply gravity: there is a y velocity "bump" when moving = fall state transition
 	player.apply_fall_gravity()
+	player.clamp_fall_speed()
 	player.apply_movement()
 	
 	# If player x velocity == 0, transition to the idle state
