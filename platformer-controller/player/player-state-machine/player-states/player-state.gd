@@ -27,17 +27,18 @@ func handle_input(event: InputEvent) -> void:
 
 
 func update(_delta: float) -> void:
-	pass
-
-
-func physics_update(_delta: float) -> void:
 	player.input_direction = _get_input_direction()
 
 
+func physics_update(_delta: float) -> void:
+	pass
+
+
 func _get_input_direction():
-	var input = 0.0
-	input = Input.get_action_strength("right") - Input.get_action_strength("left")
-	return input
+	var input = Vector2.ZERO
+	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
+	input.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	return input.normalized()
 
 
 func enter(_msg := {}) -> void:

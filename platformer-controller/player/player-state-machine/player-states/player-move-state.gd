@@ -4,10 +4,9 @@ extends PlayerGroundState
 
 func enter(msg := {}) -> void:
 	.enter(msg)
-	print("move state")
 
 
-func update(delta: float) -> void:
+func physics_update(delta: float) -> void:
 	# Need to apply gravity: there is a y velocity "bump" when moving = fall state transition
 	player.apply_fall_gravity()
 	player.apply_movement()

@@ -3,13 +3,11 @@ extends PlayerAirState
 
 
 func enter(msg := {}) -> void:
-	#Add initial jump force
 	player.velocity.y = 0
 	player.add_jump_velocity()
-	print("jump state")
 
 
-func update(delta: float) -> void:
+func physics_update(delta: float) -> void:
 		# Jump cancel (variable jump height)
 	if !player.jump_input:
 		player.apply_fall_gravity()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player/platform-controller.gd" type="Script" id=1]
 [ext_resource path="res://player/player_base_sprite.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://player/player-state-machine/player-states/player-fall-state.gd" type="Script" id=8]
 [ext_resource path="res://player/player-cam/player-cam.gd" type="Script" id=9]
 [ext_resource path="res://player/player-state-machine/player-states/player-land-state.gd" type="Script" id=10]
+[ext_resource path="res://player/player-state-machine/player-states/player-dash-state.gd" type="Script" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -42,6 +43,10 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
+[node name="DashTimer" type="Timer" parent="StateTimers"]
+wait_time = 0.3
+one_shot = true
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
 initial_state = NodePath("Idle")
@@ -60,6 +65,9 @@ script = ExtResource( 8 )
 
 [node name="Land" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 margin_left = -16.0

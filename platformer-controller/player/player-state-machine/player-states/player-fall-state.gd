@@ -8,11 +8,9 @@ func enter(msg := {}) -> void:
 		player.coyote_timer.start()
 	
 	player.fall_timer.start()
-	
-	print("fall state")
 
 
-func update(delta: float) -> void:
+func physics_update(delta: float) -> void:
 	player.apply_fall_gravity()
 	player.apply_movement()
 	
