@@ -14,15 +14,15 @@ var _facing_right := true
 var jump_input := false
 
 # Jump and fall kinematics
-var jump_height = 3 * TILE_SIZE
-var jump_x_dist = 3 * TILE_SIZE
+var jump_height = 5 * TILE_SIZE
+var jump_x_dist = 4 * TILE_SIZE
 var fall_x_dist = 1.75 * TILE_SIZE
 
 var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
 var jump_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(jump_x_dist, 2)
 
-var low_grav_apex_threshold = -20
-var jump_apex_gravity = jump_gravity * 0.5
+var low_grav_apex_threshold = -25
+var jump_apex_gravity = jump_gravity * 0.3
 
 var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
 var max_fall_velocity = jump_velocity * 0.85
@@ -39,27 +39,6 @@ onready var state_label = $StateLabel
 func _ready():
 	cam.target = self
 	state_machine.connect("transitioned", state_label, "update_label")
-
-
-func _input(event):
-	# Check if jump input has been pressed (recently with buffer)
-	if event.is_action_pressed("jump"):
-		jump_input = true
-		jump_buffer.start()
-	
-	# Check if should cancel jump early
-	if event.is_action_released("jump"):
-		jump_input = false
-
-
-func _physics_process(delta):
-	input_direction = _get_input_direction()
-
-
-func _get_input_direction():
-	var input = 0.0
-	input = Input.get_action_strength("right") - Input.get_action_strength("left")
-	return input
 
 
 func check_direction_facing():
