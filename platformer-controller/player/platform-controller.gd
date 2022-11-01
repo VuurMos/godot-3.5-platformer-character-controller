@@ -27,7 +27,8 @@ var jump_apex_gravity = jump_gravity * 0.3
 var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
 var max_fall_velocity = jump_velocity * 0.85
 
-var dash_velocity := 40 * TILE_SIZE
+var dashing := false
+var dash_strength := 60 * TILE_SIZE
 
 onready var sprite = $Sprite
 onready var cam = $PlayerCamera
@@ -71,15 +72,15 @@ func apply_fall_gravity():
 	velocity.y += fall_gravity * get_physics_process_delta_time()
 
 
-func add_dash_velocity(_dash_direction):
+func add_dash_velocity(_dash_direction, _dash_velocity):
 	if _dash_direction == Vector2.ZERO:
 		if _facing_right:
-			velocity.x = dash_velocity * 1
+			velocity.x = dash_strength * _dash_velocity * 1
 		else:
-			velocity.x = dash_velocity * -1
+			velocity.x = dash_strength * _dash_velocity * -1
 	else:
-		velocity.x = dash_velocity * _dash_direction.x
-		velocity.y = dash_velocity * _dash_direction.y
+		velocity.x = dash_strength * _dash_velocity * _dash_direction.x
+		velocity.y = dash_strength * _dash_velocity * _dash_direction.y
 
 
 func apply_friction():
@@ -96,11 +97,12 @@ func clamp_fall_speed():
 
 
 func apply_movement():
-	if is_zero_approx(input_direction.x):
-		if !is_zero_approx(velocity.x):
-			apply_friction()
-	else:
-		apply_acceleration()
-		check_direction_facing()
+	if !dashing:
+		if is_zero_approx(input_direction.x):
+			if !is_zero_approx(velocity.x):
+				apply_friction()
+		else:
+			apply_acceleration()
+			check_direction_facing()
 	
 	velocity = move_and_slide(velocity, Vector2.UP)

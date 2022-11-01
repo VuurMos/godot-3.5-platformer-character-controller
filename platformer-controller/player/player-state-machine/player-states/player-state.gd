@@ -28,7 +28,6 @@ func handle_input(event: InputEvent) -> void:
 
 func update(_delta: float) -> void:
 	player.input_direction = _get_input_direction()
-	print(player.velocity.x)
 
 
 func physics_update(_delta: float) -> void:
@@ -39,6 +38,8 @@ func _get_input_direction():
 	var input = Vector2.ZERO
 	input.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	input.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	# TODO: Normalizing the input results in the player moving slower when they also press up / down
+	# while moving left and right. 
 	return input.normalized()
 
 
