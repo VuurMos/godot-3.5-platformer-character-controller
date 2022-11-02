@@ -3,11 +3,11 @@ extends PlayerState
 
 var dash_direction := Vector2.ZERO
 var current_dash_time := 0.0
-var dash_duration := 0.05
+var dash_duration := 0.1
 
 func enter(msg := {}) -> void:
 	player.velocity.y = 0.0
-	dash_direction = player.input_direction
+	dash_direction = player.input_direction.normalized()
 	player.dashing = true
 	current_dash_time = 0.0
 	pass

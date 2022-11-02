@@ -28,7 +28,7 @@ var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
 var max_fall_velocity = jump_velocity * 0.85
 
 var dashing := false
-var dash_strength := 60 * TILE_SIZE
+var dash_strength := 40 * TILE_SIZE
 
 onready var sprite = $Sprite
 onready var cam = $PlayerCamera
