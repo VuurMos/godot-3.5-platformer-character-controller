@@ -24,6 +24,12 @@ func handle_input(event: InputEvent) -> void:
 	# Check if should cancel jump early
 	if event.is_action_released("jump"):
 		player.jump_input = false
+	
+	if event.is_action_pressed("dash"):
+		player.dash_input = true
+	
+	if event.is_action_released("dash"):
+		player.dash_input = false
 
 
 func update(_delta: float) -> void:

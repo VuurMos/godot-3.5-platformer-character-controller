@@ -15,6 +15,6 @@ func check_ground_transitions():
 		state_machine.transition_to("Fall", {from_ground = true})
 		return
 	
-	if Input.is_action_just_pressed("dash"):
+	if player.dash_input:
 		state_machine.transition_to("Dash")
 		return

@@ -27,6 +27,7 @@ var jump_apex_gravity = jump_gravity * 0.3
 var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
 var max_fall_velocity = jump_velocity * 0.85
 
+var dash_input := false
 var dashing := false
 var dash_strength := 40 * TILE_SIZE
 

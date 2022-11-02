@@ -8,6 +8,6 @@ func check_air_transitions():
 	if player.is_on_floor():
 		state_machine.transition_to("Land")
 	
-	if Input.is_action_just_pressed("dash"):
+	if player.dash_input:
 		state_machine.transition_to("Dash")
 		return
