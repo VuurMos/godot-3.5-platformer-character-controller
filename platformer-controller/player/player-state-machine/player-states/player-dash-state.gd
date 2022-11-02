@@ -30,10 +30,6 @@ func physics_update(delta: float) -> void:
 
 		if player.is_on_floor():
 			state_machine.transition_to("Land")
-	
-	print("x vel: " + str(player.velocity.x))
-	print("y: " + str(player.global_position.y))
-	print(state_machine.state)
 
 func exit() -> void:
 	player.dashing = false

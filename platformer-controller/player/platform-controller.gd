@@ -15,8 +15,8 @@ var jump_input := false
 
 # Jump and fall kinematics
 var jump_height = 5 * TILE_SIZE
-var jump_x_dist = 4 * TILE_SIZE
-var fall_x_dist = 2 * TILE_SIZE
+var jump_x_dist = 3.5 * TILE_SIZE
+var fall_x_dist = 1.75 * TILE_SIZE
 
 var jump_velocity = (2 * jump_height * max_speed) / jump_x_dist
 var jump_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(jump_x_dist, 2)
