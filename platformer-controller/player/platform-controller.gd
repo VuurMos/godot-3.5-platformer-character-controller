@@ -29,7 +29,7 @@ var max_fall_velocity = jump_velocity * 0.85
 
 var dash_input := false
 var dashing := false
-var dash_strength := 40 * TILE_SIZE
+var dash_strength := 30 * TILE_SIZE
 
 onready var sprite = $Sprite
 onready var cam = $PlayerCamera

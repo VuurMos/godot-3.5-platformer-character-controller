@@ -3,7 +3,7 @@ extends PlayerState
 
 var dash_direction := Vector2.ZERO
 var current_dash_time := 0.0
-var dash_duration := 0.1
+var dash_duration := 0.2
 
 func enter(msg := {}) -> void:
 	player.velocity.y = 0.0
