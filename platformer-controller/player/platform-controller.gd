@@ -35,7 +35,6 @@ onready var cam = $PlayerCamera
 onready var jump_buffer = $StateTimers/JumpBuffer
 onready var coyote_timer = $StateTimers/CoyoteTimer
 onready var fall_timer = $StateTimers/FallTimer
-onready var dash_timer = $StateTimers/DashTimer
 onready var state_machine = $StateMachine
 onready var state_label = $StateLabel
 
@@ -97,12 +96,4 @@ func clamp_fall_speed():
 
 
 func apply_movement():
-	if !dashing:
-		if is_zero_approx(input_direction.x):
-			if !is_zero_approx(velocity.x):
-				apply_friction()
-		else:
-			apply_acceleration()
-			check_direction_facing()
-	
 	velocity = move_and_slide(velocity, Vector2.UP)

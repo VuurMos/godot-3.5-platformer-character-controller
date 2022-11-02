@@ -16,8 +16,14 @@ func physics_update(delta: float) -> void:
 			player.apply_apex_gravity()
 		else:
 			player.apply_jump_gravity()
-	
 	player.clamp_fall_speed()
+	
+	if is_zero_approx(player.input_direction.x):
+		if !is_zero_approx(player.velocity.x):
+			player.apply_friction()
+	else:
+		player.apply_acceleration()
+		player.check_direction_facing()
 	player.apply_movement()
 	
 	check_air_transitions()

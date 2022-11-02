@@ -36,4 +36,3 @@ func physics_update(delta: float) -> void:
 
 func exit() -> void:
 	player.dashing = false
-#	current_dash_time = 0
