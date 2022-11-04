@@ -19,6 +19,9 @@ scale = Vector2( 4, 1 )
 [node name="TestPlatform2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 120, 80 )
 
+[node name="TestPlatform5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 56, 96 )
+
 [node name="TestPlatform3" parent="." instance=ExtResource( 2 )]
 position = Vector2( -120, 48 )
 

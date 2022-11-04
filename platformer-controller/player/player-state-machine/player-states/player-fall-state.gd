@@ -11,7 +11,7 @@ func enter(msg := {}) -> void:
 
 
 func physics_update(delta: float) -> void:
-	player.apply_fall_gravity()
+	player.apply_gravity(player.fall_gravity)
 	player.clamp_fall_speed()
 	
 	if is_zero_approx(player.input_direction.x):

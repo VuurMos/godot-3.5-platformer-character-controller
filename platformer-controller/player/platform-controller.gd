@@ -29,6 +29,7 @@ var max_fall_velocity = jump_velocity * 0.85
 
 var dash_input := false
 var dash_strength := 30 * TILE_SIZE
+var dash_duration := 0.2
 
 onready var sprite = $Sprite
 onready var cam = $PlayerCamera
@@ -59,16 +60,8 @@ func add_jump_velocity():
 	coyote_timer.stop()
 
 
-func apply_jump_gravity():
-	velocity.y += jump_gravity * get_physics_process_delta_time()
-
-
-func apply_apex_gravity():
-	velocity.y += jump_apex_gravity * get_physics_process_delta_time()
-
-
-func apply_fall_gravity():
-	velocity.y += fall_gravity * get_physics_process_delta_time()
+func apply_gravity(_gravity):
+	velocity.y += _gravity * get_physics_process_delta_time()
 
 
 func add_dash_velocity(_dash_direction, _dash_velocity):

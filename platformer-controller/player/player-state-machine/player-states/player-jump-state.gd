@@ -8,14 +8,14 @@ func enter(msg := {}) -> void:
 
 
 func physics_update(delta: float) -> void:
-		# Jump cancel (variable jump height)
+	# Jump cancel (variable jump height)
 	if !player.jump_input:
-		player.apply_fall_gravity()
+		player.apply_gravity(player.fall_gravity)
 	else:
 		if player.velocity.y >= player.low_grav_apex_threshold:
-			player.apply_apex_gravity()
+			player.apply_gravity(player.jump_apex_gravity)
 		else:
-			player.apply_jump_gravity()
+			player.apply_gravity(player.jump_gravity)
 	player.clamp_fall_speed()
 	
 	if is_zero_approx(player.input_direction.x):
