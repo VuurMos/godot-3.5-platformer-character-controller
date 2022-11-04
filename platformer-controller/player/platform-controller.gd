@@ -29,7 +29,7 @@ var max_fall_velocity = jump_velocity * 0.85
 
 var dash_input := false
 var dashing := false
-var dash_strength := 20 * TILE_SIZE
+var dash_strength := 30 * TILE_SIZE
 
 onready var sprite = $Sprite
 onready var cam = $PlayerCamera
@@ -73,15 +73,7 @@ func apply_fall_gravity():
 
 
 func add_dash_velocity(_dash_direction, _dash_velocity):
-	if input_direction.x > 0:
-		velocity.x = dash_strength * _dash_velocity * 1
-	elif input_direction.x < 0:
-		velocity.x = dash_strength * _dash_velocity * -1
-	else:
-		if _facing_right:
-			velocity.x = dash_strength * _dash_velocity * 1
-		else:
-			velocity.x = dash_strength * _dash_velocity * -1
+	velocity.x = dash_strength * _dash_velocity * _dash_direction
 
 
 func apply_friction():

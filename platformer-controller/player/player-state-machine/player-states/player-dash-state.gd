@@ -1,17 +1,26 @@
 # Dash state
 extends PlayerState
 
-var dash_direction := Vector2.ZERO
+var dash_direction := 0
 var current_dash_time := 0.0
-var dash_duration := 0.3
+var dash_duration := 0.2
 var minimum_dash_progress := 0.5
 
 
 func enter(msg := {}) -> void:
 	player.velocity.y = 0.0
-	dash_direction = player.input_direction.normalized()
 	player.dashing = true
 	current_dash_time = 0.0
+	
+	if player.input_direction.x > 0:
+		dash_direction = 1
+	elif player.input_direction.x < 0:
+		dash_direction = -1
+	else:
+		if player._facing_right:
+			dash_direction = 1
+		else:
+			dash_direction = -1
 
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
@@ -36,11 +45,7 @@ func physics_update(delta: float) -> void:
 			return
 
 		if player.is_on_floor():
-			if !is_zero_approx(player.input_direction.x):
-				state_machine.transition_to("Move")
-			else:
-				player.velocity.x = 0
-				state_machine.transition_to("Idle")
+			state_machine.transition_to("Move")
 
 func exit() -> void:
 	player.dashing = false
