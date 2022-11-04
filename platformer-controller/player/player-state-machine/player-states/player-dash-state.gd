@@ -25,25 +25,23 @@ func enter(msg := {}) -> void:
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
 		player.velocity.y = 0
+		player.apply_fall_gravity()
+		player.clamp_fall_speed()
 	
 	current_dash_time += delta
 	var dash_progress = current_dash_time / dash_duration
 	
-	print("dash progress: " + str(dash_progress))
+	var dash_velocity = 1 - pow(2, -10 * dash_progress)
 	
-	#Apply the dash velocity
-	if player.dash_input or dash_progress < minimum_dash_progress:
-		var dash_velocity = 1 - pow(2, -10 * dash_progress)
-		
-		player.add_dash_velocity(dash_direction, dash_velocity)
-		player.apply_movement()
+	player.add_dash_velocity(dash_direction, dash_velocity)
+	player.apply_movement()
 	
-	#Leave the dash state
-	if current_dash_time >= dash_duration or !player.dash_input and dash_progress > minimum_dash_progress:
+	# Leave state
+	if current_dash_time >= dash_duration:
 		if !player.is_on_floor():
 			state_machine.transition_to("Fall", {from_ground = true})
 			return
-
+		
 		if player.is_on_floor():
 			state_machine.transition_to("Move")
 
