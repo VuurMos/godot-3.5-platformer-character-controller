@@ -73,14 +73,15 @@ func apply_fall_gravity():
 
 
 func add_dash_velocity(_dash_direction, _dash_velocity):
-	if _dash_direction == Vector2.ZERO:
+	if input_direction.x > 0:
+		velocity.x = dash_strength * _dash_velocity * 1
+	elif input_direction.x < 0:
+		velocity.x = dash_strength * _dash_velocity * -1
+	else:
 		if _facing_right:
 			velocity.x = dash_strength * _dash_velocity * 1
 		else:
 			velocity.x = dash_strength * _dash_velocity * -1
-	else:
-		velocity.x = dash_strength * _dash_velocity * _dash_direction.x
-		velocity.y = dash_strength * _dash_velocity * _dash_direction.y
 
 
 func apply_friction():

@@ -4,6 +4,7 @@ extends PlayerState
 var dash_direction := Vector2.ZERO
 var current_dash_time := 0.0
 var dash_duration := 0.2
+var minimum_dash_duration := 0.1
 
 func enter(msg := {}) -> void:
 	player.velocity.y = 0.0
@@ -12,10 +13,12 @@ func enter(msg := {}) -> void:
 	current_dash_time = 0.0
 
 func physics_update(delta: float) -> void:
-	if player.dash_input:
+	var dash_progress = current_dash_time / dash_duration
+	
+	if player.dash_input or dash_progress < minimum_dash_duration:
 		current_dash_time += delta
 		
-		var dash_progress = current_dash_time / dash_duration
+		
 		var dash_velocity = 1 - pow(2, -10 * dash_progress)
 		
 		player.add_dash_velocity(dash_direction, dash_velocity)
