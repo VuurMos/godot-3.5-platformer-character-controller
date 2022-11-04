@@ -34,8 +34,6 @@ func handle_input(event: InputEvent) -> void:
 
 func update(_delta: float) -> void:
 	player.input_direction = _get_input_direction()
-	print(player.velocity.x)
-	print(state_machine.state)
 
 
 func physics_update(_delta: float) -> void:
