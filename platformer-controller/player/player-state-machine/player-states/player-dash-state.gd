@@ -6,6 +6,11 @@ var current_dash_time := 0.0
 var dash_duration := 0.2
 var minimum_dash_duration := 0.1
 
+# exponential ease out:
+# var dash_velocity = 1 - pow(2, -10 * dash_progress)
+
+var c1 = 1.70158
+
 func enter(msg := {}) -> void:
 	player.velocity.y = 0.0
 	dash_direction = player.input_direction.normalized()
@@ -18,7 +23,8 @@ func physics_update(delta: float) -> void:
 	if player.dash_input or dash_progress < minimum_dash_duration:
 		current_dash_time += delta
 		
-		
+		var c3 = c1 + dash_progress
+#		var dash_velocity = 1 + c3 * pow(dash_progress - 1, 3) + c1 * pow(dash_progress - 1, 2)
 		var dash_velocity = 1 - pow(2, -10 * dash_progress)
 		
 		player.add_dash_velocity(dash_direction, dash_velocity)
