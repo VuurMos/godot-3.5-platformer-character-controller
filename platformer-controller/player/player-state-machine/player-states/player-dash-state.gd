@@ -9,7 +9,6 @@ var minimum_dash_progress := 0.5
 
 func enter(msg := {}) -> void:
 	player.velocity.y = 0.0
-	player.dashing = true
 	current_dash_time = 0.0
 	
 	if player.input_direction.x > 0:
@@ -36,7 +35,6 @@ func physics_update(delta: float) -> void:
 	player.add_dash_velocity(dash_direction, dash_velocity)
 	player.apply_movement()
 	
-	# Leave state
 	if current_dash_time >= dash_duration:
 		if !player.is_on_floor():
 			state_machine.transition_to("Fall", {from_ground = true})
@@ -46,5 +44,4 @@ func physics_update(delta: float) -> void:
 			state_machine.transition_to("Move")
 
 func exit() -> void:
-	player.dashing = false
 	player.dash_input = false
