@@ -60,12 +60,12 @@ func add_jump_velocity():
 	coyote_timer.stop()
 
 
-func apply_gravity(_gravity):
-	velocity.y += _gravity * get_physics_process_delta_time()
-
-
 func add_dash_velocity(_dash_direction, _dash_velocity):
 	velocity.x = dash_strength * _dash_velocity * _dash_direction
+
+
+func apply_gravity(_gravity):
+	velocity.y += _gravity * get_physics_process_delta_time()
 
 
 func apply_friction():

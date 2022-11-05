@@ -7,6 +7,8 @@ func enter(msg := {}) -> void:
 
 
 func physics_update(delta: float) -> void:
+	ground_movement()
+	
 	# If player direction input or x velocity != 0, transition to the move state
 	if !is_zero_approx(player.input_direction.x):
 		state_machine.transition_to("Move")
