@@ -11,6 +11,8 @@ func enter(msg := {}) -> void:
 
 
 func physics_update(delta: float) -> void:
+	# TODO: If transitioning from a ground state, ramp up the gravity slowly 
+	# to prevent the player from falling so quickly when walking off smaller steps
 	player.apply_gravity(player.fall_gravity)
 	player.clamp_fall_speed()
 	
@@ -24,6 +26,13 @@ func physics_update(delta: float) -> void:
 	
 	# Jump check - needs to be before double jump check!
 	if !player.jump_buffer.is_stopped() and !player.coyote_timer.is_stopped():
+		player.fall_timer.stop()
 		state_machine.transition_to("Jump")
+		return
+	
+	if player.dash_input:
+		state_machine.transition_to("Dash")
+		player.fall_timer.stop()
+		return
 	
 	check_air_transitions()

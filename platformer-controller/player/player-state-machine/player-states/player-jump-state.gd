@@ -28,6 +28,11 @@ func physics_update(delta: float) -> void:
 	
 	check_air_transitions()
 	
+	if player.dash_input:
+		state_machine.transition_to("Dash")
+		player.fall_timer.stop()
+		return
+	
 	# If y velocity becomes positive, transition to fall state
 	if player.velocity.y > 0:
 		state_machine.transition_to("Fall")

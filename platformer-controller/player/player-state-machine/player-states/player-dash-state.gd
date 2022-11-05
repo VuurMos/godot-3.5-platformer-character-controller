@@ -9,6 +9,7 @@ func enter(msg := {}) -> void:
 	player.velocity.y = 0.0
 	current_dash_time = 0.0
 	
+	# TODO: Change facing direction based on input
 	if player.input_direction.x > 0:
 		dash_direction = 1
 	elif player.input_direction.x < 0:
@@ -22,6 +23,7 @@ func enter(msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	if player.is_on_floor():
+		# These prevent the player from bumping the ground during the dash
 		player.velocity.y = 0
 		player.apply_gravity(player.fall_gravity)
 		player.clamp_fall_speed()

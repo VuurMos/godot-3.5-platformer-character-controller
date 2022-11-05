@@ -6,6 +6,7 @@ func enter(msg := {}) -> void:
 	
 	if player.fall_timer.is_stopped():
 		Events.emit_signal("cam_noise_screen_shaked", 0.3)
+	player.fall_timer.stop()
 
 
 func physics_update(delta: float) -> void:
