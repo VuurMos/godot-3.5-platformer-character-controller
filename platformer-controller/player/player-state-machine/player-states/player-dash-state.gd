@@ -41,6 +41,7 @@ func physics_update(delta: float) -> void:
 	print("dash velocity: " + str(dash_velocity_modifier))
 	
 	player.add_dash_velocity(dash_direction, dash_velocity_modifier)
+	player.check_direction_facing()
 	player.apply_movement()
 	
 	if current_dash_time >= player.dash_duration:

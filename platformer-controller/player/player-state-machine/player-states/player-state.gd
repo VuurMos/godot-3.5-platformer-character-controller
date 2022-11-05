@@ -21,7 +21,7 @@ func handle_input(event: InputEvent) -> void:
 		player.jump_input = true
 		player.jump_buffer.start()
 	
-	# Check if should cancel jump early
+	# Use to check if should cancel jump early
 	if event.is_action_released("jump"):
 		player.jump_input = false
 	

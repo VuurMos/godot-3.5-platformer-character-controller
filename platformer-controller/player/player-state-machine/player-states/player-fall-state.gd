@@ -32,7 +32,6 @@ func physics_update(delta: float) -> void:
 		player.check_direction_facing()
 	player.apply_movement()
 	
-	# Jump check - needs to be before double jump check!
 	if !player.jump_buffer.is_stopped() and !player.coyote_timer.is_stopped():
 		player.fall_timer.stop()
 		state_machine.transition_to("Jump")
