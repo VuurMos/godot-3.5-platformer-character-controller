@@ -15,7 +15,7 @@ func check_ground_transitions():
 		state_machine.transition_to("Fall", {from_ground = true})
 		return
 	
-	if player.dash_input:
+	if player.dash_input and player.dash_cooldown.is_stopped():
 		state_machine.transition_to("Dash")
 		return
 

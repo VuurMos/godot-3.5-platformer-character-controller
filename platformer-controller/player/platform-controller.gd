@@ -41,6 +41,7 @@ onready var cam = $PlayerCamera
 onready var jump_buffer = $StateTimers/JumpBuffer
 onready var coyote_timer = $StateTimers/CoyoteTimer
 onready var fall_timer = $StateTimers/FallTimer
+onready var dash_cooldown = $StateTimers/DashCooldown
 onready var state_machine = $StateMachine
 onready var state_label = $StateLabel
 

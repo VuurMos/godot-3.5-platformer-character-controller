@@ -21,6 +21,8 @@ func enter(msg := {}) -> void:
 			dash_direction = 1
 		else:
 			dash_direction = -1
+	
+	player.dash_cooldown.start()
 
 
 func physics_update(delta: float) -> void:

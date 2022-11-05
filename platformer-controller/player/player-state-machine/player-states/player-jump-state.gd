@@ -28,7 +28,7 @@ func physics_update(delta: float) -> void:
 	
 	check_air_transitions()
 	
-	if player.dash_input:
+	if player.dash_input and player.dash_cooldown.is_stopped():
 		state_machine.transition_to("Dash")
 		player.fall_timer.stop()
 		return
