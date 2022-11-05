@@ -2,7 +2,7 @@ class_name PlayerCamera
 extends Camera2D
 
 # Follow Variables
-export(float, 0.01, 1, 0.01) var smooth_follow_factor := 0.5 # 0.01 = slow, 0.1 = fast, 0.5 = very fast, 1 = instant
+export(float, 0.01, 1, 0.01) var smooth_follow_factor := 0.3 # 0.01 = slow, 0.1 = fast, 0.5 = very fast, 1 = instant
 
 var target = null
 var time_scale := 1.0 # used to adjust camera follow rate with changes in time scale
