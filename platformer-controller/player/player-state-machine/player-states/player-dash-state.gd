@@ -49,7 +49,10 @@ func physics_update(delta: float) -> void:
 			return
 		
 		if player.is_on_floor():
-			state_machine.transition_to("Move")
+			if is_zero_approx(player.input_direction.x):
+				state_machine.transition_to("Idle")
+			else:
+				state_machine.transition_to("Move")
 
 
 func exit() -> void:

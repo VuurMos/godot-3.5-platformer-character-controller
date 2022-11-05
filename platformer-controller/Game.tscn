@@ -26,4 +26,4 @@ position = Vector2( 56, 96 )
 position = Vector2( -120, 48 )
 
 [node name="TestPlatform4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 120, -48 )
+position = Vector2( 120, -16 )
