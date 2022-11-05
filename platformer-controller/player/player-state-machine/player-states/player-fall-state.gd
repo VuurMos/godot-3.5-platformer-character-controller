@@ -1,24 +1,27 @@
 # Fall State
 extends PlayerAirState
 
-var from_ground_fall := false
+var from_jump_fall := false
 
 func enter(msg := {}) -> void:
 	# Start coyote time
 	if msg.has("from_ground"):
 		player.coyote_timer.start()
-		from_ground_fall = true
+	
+	if msg.has("from_jump"):
+		from_jump_fall = true
 	else:
-		from_ground_fall = false
+		from_jump_fall = false
 	
 	player.fall_timer.start()
 
 
 func physics_update(delta: float) -> void:
-	if from_ground_fall:
-		player.apply_gravity(player.fall_gravity * 0.5)
+	if from_jump_fall:
+		player.apply_gravity(player.quick_fall_gravity)
 	else:
 		player.apply_gravity(player.fall_gravity)
+	
 	player.clamp_fall_speed()
 	
 	if is_zero_approx(player.input_direction.x):

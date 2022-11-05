@@ -10,7 +10,7 @@ func enter(msg := {}) -> void:
 func physics_update(delta: float) -> void:
 	# Jump cancel (variable jump height)
 	if !player.jump_input:
-		player.apply_gravity(player.fall_gravity)
+		player.apply_gravity(player.quick_fall_gravity)
 	else:
 		if player.velocity.y >= player.low_grav_apex_threshold:
 			player.apply_gravity(player.jump_apex_gravity)
@@ -35,4 +35,4 @@ func physics_update(delta: float) -> void:
 	
 	# If y velocity becomes positive, transition to fall state
 	if player.velocity.y > 0:
-		state_machine.transition_to("Fall")
+		state_machine.transition_to("Fall", {from_jump = true})

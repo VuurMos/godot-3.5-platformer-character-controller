@@ -24,12 +24,17 @@ var jump_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(jump_x_dist, 2)
 var low_grav_apex_threshold = -25
 var jump_apex_gravity = jump_gravity * 0.3
 
-var fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
+var quick_fall_gravity = (2 * jump_height * pow(max_speed, 2)) / pow(fall_x_dist, 2)
+var fall_gravity = quick_fall_gravity * 0.4
 var max_fall_velocity = jump_velocity * 0.85
 
 var dash_input := false
-var dash_strength := 30 * TILE_SIZE
-var dash_duration := 0.2
+var dash_duration := 0.1
+# Rough estimate of average modifier value over the dash duration. Estimate is duration dependent.
+var avg_dash_velocity_modifier := 0.92
+var dash_distance := 3 * TILE_SIZE
+# Estimated velocity required to travel the desired distance over the dash. 
+var est_dash_velocity := dash_distance / (dash_duration * avg_dash_velocity_modifier)
 
 onready var sprite = $Sprite
 onready var cam = $PlayerCamera
@@ -60,8 +65,8 @@ func add_jump_velocity():
 	coyote_timer.stop()
 
 
-func add_dash_velocity(_dash_direction, _dash_velocity):
-	velocity.x = dash_strength * _dash_velocity * _dash_direction
+func add_dash_velocity(_dash_direction, _dash_velocity_modifier):
+	velocity.x = est_dash_velocity * _dash_velocity_modifier * _dash_direction
 
 
 func apply_gravity(_gravity):
