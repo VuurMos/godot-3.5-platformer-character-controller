@@ -2,10 +2,6 @@
 extends PlayerGroundState
 
 
-func enter(msg := {}) -> void:
-	.enter(msg)
-
-
 func physics_update(delta: float) -> void:
 	ground_movement()
 	

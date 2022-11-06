@@ -2,8 +2,6 @@
 extends PlayerGroundState
 
 func enter(msg := {}) -> void:
-	.enter(msg)
-	
 	if player.fall_timer.is_stopped():
 		Events.emit_signal("cam_noise_screen_shaked", 0.3)
 	player.fall_timer.stop()

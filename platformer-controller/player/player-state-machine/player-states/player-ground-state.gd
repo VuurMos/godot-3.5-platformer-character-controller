@@ -2,10 +2,6 @@ class_name PlayerGroundState
 extends PlayerState
 
 
-func enter(msg := {}) -> void:
-	pass
-
-
 func check_ground_transitions():	
 	if !player.jump_buffer.is_stopped():
 		state_machine.transition_to("Jump")
